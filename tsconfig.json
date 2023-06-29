@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@modules/*": ["src/modules/*"],
+      "@queues/*": ["src/queues/*"],
+      "@databases/*": ["src/databases/*"],
+      "@configs/*": ["src/configs/*"],
+      "@commons/*": ["src/commons/*"],
+      "@app": ["src/app.module"],
+      "@entities": ["src/entities/index"],
+      "@entities/*": ["src/entities/*"],
+    },
+    "esModuleInterop": true
+  }
+}
