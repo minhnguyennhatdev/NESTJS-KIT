@@ -6,6 +6,8 @@ import {
   Repository,
 } from 'typeorm';
 import { defaults } from 'lodash';
+import { BaseCacheModel } from '@commons/bases/cache-model.base';
+import { CacheService } from '@commons/cache/cache.service';
 
 /**
  * HOW TO USE
@@ -13,14 +15,16 @@ import { defaults } from 'lodash';
  *   constructor(
  *     @InjectRepository(UserEntity)
  *     private readonly user: Repository<UserEntity>,
+ *     protected readonly cacheService: CacheService,
  *   ) {
- *     super(user);
+ *     super(user, cacheService);
  *   }
  * }
  */
-export class BaseRepository<T> {
-  private readonly repository: Repository<T>;
-  constructor(repository: Repository<T>) {
+export class BaseRepository<T> extends BaseCacheModel<T> {
+  protected readonly repository: Repository<T>;
+  constructor(repository: Repository<T>, cacheService: CacheService) {
+    super(repository, cacheService);
     this.repository = repository;
   }
 

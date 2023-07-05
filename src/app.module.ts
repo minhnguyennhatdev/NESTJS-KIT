@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { LoggerModule } from '@databases/logger/logger.module';
-import { ElasticModule } from '@databases/elasticsearch/elasticsearch.module';
+import RootModule from '@configs/root.config';
 
 @Module({
-  imports: [LoggerModule, ElasticModule],
+  imports: RootModule,
   controllers: [AppController],
 })
 export class AppModule {}

@@ -2,9 +2,11 @@ import config from '@configs/configuration';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { MySQLModule } from '@databases/mysql/mysql.module';
-import { RedisModule } from '@databases/redis/redis.module';
 import { MongoModule } from '@databases/mongodb/mongo.module';
 import { LoggerModule } from '@databases/logger/logger.module';
+import { CacheModule } from '@commons/cache/cache.module';
+import { ElasticModule } from '@databases/elasticsearch/elasticsearch.module';
+import { UserModule } from '@modules/user/user.module';
 
 const RootModule = [
   ConfigModule.forRoot({
@@ -16,8 +18,10 @@ const RootModule = [
   }),
   MongoModule,
   MySQLModule,
-  RedisModule,
+  CacheModule,
   LoggerModule,
+  ElasticModule,
+  UserModule,
 ];
 
 export default RootModule;

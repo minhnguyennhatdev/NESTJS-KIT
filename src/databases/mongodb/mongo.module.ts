@@ -6,8 +6,10 @@ import { ReadPreference } from 'mongodb';
 @Module({
   imports: [
     MongooseModule.forRoot(config.MONGODB.URI, {
-      readPreference: ReadPreference.SECONDARY,
+      readPreference: ReadPreference.SECONDARY_PREFERRED,
     }),
   ],
 })
 export class MongoModule {}
+
+console.log(config.MONGODB.URI);
