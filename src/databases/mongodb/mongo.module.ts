@@ -11,5 +11,3 @@ import { ReadPreference } from 'mongodb';
   ],
 })
 export class MongoModule {}
-
-console.log(config.MONGODB.URI);

@@ -4,7 +4,6 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { MySQLModule } from '@databases/mysql/mysql.module';
 import { MongoModule } from '@databases/mongodb/mongo.module';
 import { LoggerModule } from '@databases/logger/logger.module';
-import { CacheModule } from '@commons/cache/cache.module';
 import { ElasticModule } from '@databases/elasticsearch/elasticsearch.module';
 import { UserModule } from '@modules/user/user.module';
 
@@ -18,7 +17,6 @@ const RootModule = [
   }),
   MongoModule,
   MySQLModule,
-  CacheModule,
   LoggerModule,
   ElasticModule,
   UserModule,

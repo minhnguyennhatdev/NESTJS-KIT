@@ -15,7 +15,11 @@ const config = {
   REDIS: {
     URL:
       process.env.REDIS_URL ||
-      'redis://default:@127.0.0.1:6379/0?allowUsernameInURI=true',
+      'redis://default:@127.0.0.1:6379/?allowUsernameInURI=true',
+
+    URLS: process.env.REDIS_URL.split(',') || [
+      'redis://default:@127.0.0.1:6379/?allowUsernameInURI=true',
+    ],
   },
 
   MONGODB: {

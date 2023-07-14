@@ -1,5 +1,5 @@
-import { CacheService } from '@commons/cache/cache.service';
-import { RedisModule } from '@databases/redis/redis.module';
+import { CacheService } from '@databases/cache/cache.service';
+import { RedisModule } from '@databases/cache/redis/redis.module';
 import { Module } from '@nestjs/common';
 
 @Module({

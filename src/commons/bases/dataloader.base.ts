@@ -1,7 +1,7 @@
 import { Document, FilterQuery, Model, Types } from 'mongoose';
 import { FindManyOptions, Repository, In } from 'typeorm';
 import DataLoader from 'dataloader';
-import { CacheService } from '@commons/cache/cache.service';
+import { CacheService } from '@databases/cache/cache.service';
 import sift from 'sift';
 
 type DataSource<T> = Model<T> | Repository<T>;
@@ -25,13 +25,10 @@ type Output<T> =
  *   }
  * }
  */
-export class BaseCacheModel<T> {
-  private readonly dataloader: DataLoader<
-    Input<T>,
-    any,
-    Promise<Output<T>[] | Output<T>>
-  >;
+export class DataLoaderModel<T> {
+  private readonly dataloader;
   protected readonly cacheService: CacheService;
+  private readonly BATCH_DELAY = 100; //ms
   private readonly cachePrefix: string;
   private readonly cachePrefixQueryOption: string;
   private readonly dataSource: DataSource<T>;
@@ -43,30 +40,36 @@ export class BaseCacheModel<T> {
     if (isMongooseCollection) {
       this.cachePrefix = `mongo:${(this.dataSource as Model<T>)?.name}:`;
     } else {
-      this.cachePrefix = `mysql:${(
-        this.dataSource as Repository<T>
-      )?.target?.toString()}:`;
+      this.cachePrefix = `mysql:${
+        (this.dataSource as Repository<T>)?.metadata?.name
+      }:`;
     }
     this.cachePrefixQueryOption = `${this.cachePrefix}query:`;
 
-    this.dataloader = new DataLoader((queries: Input<T>[]) => {
-      const query: Input<T> = isMongooseCollection
-        ? {
-            $or: queries,
-          }
-        : {
-            where: queries,
-          };
+    this.dataloader = new DataLoader(
+      (queries: Input<T>[]) => {
+        console.log('queries', queries);
+        const query: Input<T> = isMongooseCollection
+          ? {
+              $or: queries,
+            }
+          : {
+              where: queries,
+            };
+        const data = this.dataSource.find(query);
+        if (isMongooseCollection) {
+          (query as any).lean();
+        }
 
-      const data = this.dataSource.find(query);
-      if (isMongooseCollection) {
-        (query as any).lean();
-      }
-
-      return data.then((result) => {
-        return queries.map((q) => result.filter(sift(q)));
-      });
-    });
+        return data.then((result) => {
+          return queries.map((q) => result.filter(sift(q)));
+        });
+      },
+      {
+        cache: false,
+        batchScheduleFn: (cb) => setTimeout(cb, this.BATCH_DELAY),
+      },
+    );
   }
 
   private isMongooseCollection(
@@ -75,10 +78,13 @@ export class BaseCacheModel<T> {
     return (<Model<T>>dataSource).baseModelName !== undefined;
   }
 
-  async findBatchedAndCached(query: Input<T>) {
+  async findBatched(query: Input<T>) {
     if (!query) return null;
     const key = this.cachePrefix + JSON.stringify(query);
-    const data = this.dataloader.load(query);
-    return this.cacheService.getOneCached(key, () => data);
+    return this.cacheService.getOneCached(
+      key,
+      async () => this.dataloader.load(query),
+      1000 * 60,
+    );
   }
 }

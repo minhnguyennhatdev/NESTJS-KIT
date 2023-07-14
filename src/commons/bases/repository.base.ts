@@ -6,8 +6,8 @@ import {
   Repository,
 } from 'typeorm';
 import { defaults } from 'lodash';
-import { BaseCacheModel } from '@commons/bases/cache-model.base';
-import { CacheService } from '@commons/cache/cache.service';
+import { DataLoaderModel } from '@commons/bases/dataloader.base';
+import { CacheService } from '@databases/cache/cache.service';
 
 /**
  * HOW TO USE
@@ -21,7 +21,7 @@ import { CacheService } from '@commons/cache/cache.service';
  *   }
  * }
  */
-export class BaseRepository<T> extends BaseCacheModel<T> {
+export class BaseRepository<T> extends DataLoaderModel<T> {
   protected readonly repository: Repository<T>;
   constructor(repository: Repository<T>, cacheService: CacheService) {
     super(repository, cacheService);

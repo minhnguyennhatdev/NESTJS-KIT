@@ -38,6 +38,7 @@
     "cookie-parser": "^1.4.6",
     "dataloader": "^2.2.2",
     "dotenv": "^16.3.1",
+    "ioredis": "^5.3.2",
     "mongodb": "^5.6.0",
     "mongoose": "^7.3.1",
     "mysql2": "^3.4.2",
