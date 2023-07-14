@@ -2,13 +2,11 @@ import config from '@configs/configuration';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-const DATABASE_TYPE = 'postgres';
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: DATABASE_TYPE,
-      url: config.POSTGRESQL.URL,
+      type: config.DATABASE.NAME as any,
+      url: config.DATABASE.URL,
       entities: [],
       ssl: true,
       synchronize: config.IS_DEVELOPMENT,

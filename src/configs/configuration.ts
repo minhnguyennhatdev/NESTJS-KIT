@@ -26,16 +26,16 @@ const config = {
     URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/demo',
   },
 
-  POSTGRESQL: {
+  DATABASE: {
+    NAME: process.env.DATABASE_NAME || 'postgres',
     URL:
-      process.env.POSTGRESQL_URL ||
-      'postgres://admin:admin@localhost:5432/demo',
+      process.env.DATABASE_URL || 'postgres://admin:admin@localhost:5432/demo',
   },
 
   ELASTICSEARCH: {
     NODE: process.env.ELASTICSEARCH_NODE || 'http://localhost:9200',
     INDEX: {},
   },
-};
+} as const;
 
 export default config;

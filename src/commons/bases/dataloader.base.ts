@@ -3,6 +3,7 @@ import { FindManyOptions, Repository, In } from 'typeorm';
 import DataLoader from 'dataloader';
 import { CacheService } from '@databases/cache/cache.service';
 import sift from 'sift';
+import config from '@configs/configuration';
 
 type DataSource<T> = Model<T> | Repository<T>;
 type Input<T> = FindManyOptions<T> | FilterQuery<T>;
@@ -44,7 +45,7 @@ export class DataLoaderModel<T> {
     if (isMongooseCollection) {
       this.cachePrefix = `mongo:${(this.dataSource as Model<T>)?.name}:`;
     } else {
-      this.cachePrefix = `postgresql:${
+      this.cachePrefix = `${config.DATABASE.NAME}:${
         (this.dataSource as Repository<T>)?.metadata?.name
       }:`;
     }
