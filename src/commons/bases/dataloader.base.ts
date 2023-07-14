@@ -44,7 +44,7 @@ export class DataLoaderModel<T> {
     if (isMongooseCollection) {
       this.cachePrefix = `mongo:${(this.dataSource as Model<T>)?.name}:`;
     } else {
-      this.cachePrefix = `mysql:${
+      this.cachePrefix = `postgresql:${
         (this.dataSource as Repository<T>)?.metadata?.name
       }:`;
     }

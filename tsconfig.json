@@ -20,12 +20,12 @@
     "paths": {
       "@modules/*": ["src/modules/*"],
       "@queues/*": ["src/queues/*"],
-      "@databases/*": ["src/databases/*"],
       "@configs/*": ["src/configs/*"],
       "@commons/*": ["src/commons/*"],
       "@app": ["src/app.module"],
       "@entities": ["src/entities/index"],
       "@entities/*": ["src/entities/*"],
+      "@databases/*": ["src/databases/*"],
     },
     "esModuleInterop": true
   }
