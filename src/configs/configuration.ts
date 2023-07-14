@@ -26,12 +26,10 @@ const config = {
     URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/demo',
   },
 
-  MYSQL: {
-    HOST: process.env.MYSQL_HOST || 'localhost',
-    PORT: Number(process.env.MYSQL_PORT) || 3306,
-    USERNAME: process.env.MYSQL_USERNAME || 'root',
-    PASSWORD: process.env.MYSQL_PASSWORD || 'root',
-    DATABASE: process.env.MYSQL_DATABASE || 'demo',
+  POSTGRESQL: {
+    URL:
+      process.env.POSTGRESQL_URL ||
+      'postgres://admin:admin@localhost:5432/demo',
   },
 
   ELASTICSEARCH: {

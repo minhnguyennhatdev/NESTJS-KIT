@@ -1,6 +1,6 @@
 import { BaseRepository } from '@commons/bases/repository.base';
 import { CacheService } from '@databases/cache/cache.service';
-import { UserEntity } from '@modules/user/entities/user.entity';
+import { UserEntity } from '@modules/users/entities/user.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

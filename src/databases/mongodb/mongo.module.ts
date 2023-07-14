@@ -2,6 +2,9 @@ import config from '@configs/configuration';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ReadPreference } from 'mongodb';
+import mongoose from 'mongoose';
+
+mongoose.set('debug', { color: true, shell: true });
 
 @Module({
   imports: [

@@ -26,7 +26,11 @@ type Output<T> =
  * }
  */
 export class DataLoaderModel<T> {
-  private readonly dataloader;
+  private readonly dataloader: DataLoader<
+    Input<T>,
+    Promise<Output<T>[] | Output<T>>,
+    Promise<Output<T>[] | Output<T>>
+  >;
   protected readonly cacheService: CacheService;
   private readonly BATCH_DELAY = 100; //ms
   private readonly cachePrefix: string;
