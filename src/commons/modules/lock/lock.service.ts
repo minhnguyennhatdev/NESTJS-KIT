@@ -1,6 +1,6 @@
 import { MINUTES_TO_SECONDS } from '@commons/constants';
 import { Seconds } from '@commons/types/Time';
-import { Inject, Injectable, Scope } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Redis } from 'ioredis';
 import config from '@configs/configuration';
 import { REDIS_PROVIDER } from '@databases/redis/redis.providers';
@@ -8,9 +8,7 @@ import { REDIS_PROVIDER } from '@databases/redis/redis.providers';
 /**
  * Service for managing locks using Redis.
  */
-@Injectable({
-  scope: Scope.DEFAULT,
-})
+@Injectable()
 export class LockService {
   private readonly redisCache: Redis;
 

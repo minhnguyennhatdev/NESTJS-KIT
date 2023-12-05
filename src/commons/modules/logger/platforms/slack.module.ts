@@ -18,7 +18,7 @@ export class NamiSlack {
   sendSlackMessage = debounce(
     async (message: string, payload?: object) => {
       return this.slackService.postMessage({
-        text: message,
+        text: `${config.SERVICE}: ${message}`,
         blocks: [
           {
             type: 'section',
@@ -52,9 +52,7 @@ export class NamiSlack {
       type: 'api',
       token: config.SLACK.BOT_TOKEN,
       isGlobal: true,
-      defaultChannel: config.IS_PRODUCTION
-        ? config.SLACK.CHANNELS.ALERT
-        : config.SLACK.CHANNELS.ALERT_DEV,
+      defaultChannel: config.SLACK.CHANNELS.ALERT,
       clientOptions: {
         retryConfig: {
           maxRetryTime: config.NICE,

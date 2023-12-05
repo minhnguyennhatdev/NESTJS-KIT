@@ -10,11 +10,19 @@ import { CacheModule } from '@commons/modules/cache/cache.module';
 import { LockModule } from '@commons/modules/lock/lock.module';
 import * as redisStore from 'cache-manager-redis-store';
 import type { RedisClientOptions } from 'redis';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { SECONDS_TO_MILLISECONDS } from '@commons/constants';
 
-const BaseModules = [
+export const RootModules = [
   ConfigModule.forRoot({
     isGlobal: true,
   }),
+  ThrottlerModule.forRoot([
+    {
+      ttl: SECONDS_TO_MILLISECONDS.TEN,
+      limit: config.NICE,
+    },
+  ]),
   BullModule.forRoot({
     url: config.REDIS.CACHE.URI,
   }),
@@ -24,14 +32,12 @@ const BaseModules = [
     ttl: config.REDIS.CACHE.EXPIRE_TIME,
     isGlobal: true,
   }),
-];
 
-const DatabaseModules = [MongoDBModule, RedisModule, ESModule];
+  MongoDBModule,
+  RedisModule,
+  ESModule,
 
-const CommonModules = [CacheModule, LoggerModule, LockModule];
-
-export const RootModules = [
-  ...BaseModules,
-  ...DatabaseModules,
-  ...CommonModules,
+  CacheModule,
+  LoggerModule,
+  LockModule,
 ];

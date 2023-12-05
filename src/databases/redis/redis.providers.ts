@@ -13,10 +13,3 @@ export const RedisCacheProvider: Provider = {
     return new Redis(config.REDIS.CACHE.URI);
   },
 };
-
-export const RedisPriceProvider: Provider = {
-  provide: REDIS_PROVIDER.PRICE,
-  useFactory: () => {
-    return new Redis(config.REDIS.PRICE.URI);
-  },
-};

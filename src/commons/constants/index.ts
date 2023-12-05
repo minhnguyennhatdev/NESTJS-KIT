@@ -1,45 +1,5 @@
 import os from 'os';
 
-export const USER_CATEGORIES = {
-  NAMI: 0,
-  FRAME_ONUS: 1,
-  FRAME_NAMI: 2,
-};
-
-export const WALLET_TYPES = {
-  SPOT: 0,
-  MARGIN: 1,
-  FUTURES: 2,
-  P2P: 3,
-  POOL: 4,
-  EARN: 5,
-  BROKER: 8,
-  FRAME_NAMI: 9,
-  INSURANCE: 10,
-  FINANCE: 11,
-};
-
-export const PRODUCTS = {
-  NAMI: 0,
-  FRAME_ONUS: 1,
-  FRAME_NAMI: 2,
-};
-
-export const STAKING_PERCENT = {
-  VNDC: {
-    dailyInterestPercent: 0.035,
-    annualInterestPercent: 12.79,
-  },
-  VNST: {
-    dailyInterestPercent: 0.035,
-    annualInterestPercent: 12.79,
-  },
-  USDT: {
-    dailyInterestPercent: 0.0164,
-    annualInterestPercent: 6,
-  },
-};
-
 export const MAXIMUM_LIMIT_SIZE = {
   TWENTY: 20,
   ONE_HUNDRED: 100,
@@ -80,12 +40,6 @@ export const HTTP_METHOD = {
   patch: 'patch',
   PATCH: 'PATCH',
 } as Record<Method, Method>;
-
-export const USDT_VNDC_CENTER_RATE = {
-  USDT_VNDC_RATE: 23400,
-  USDT_VNDC_BID: 23407,
-  USDT_VNDC_ASK: 23423,
-};
 
 export const SECONDS = {
   ONE: 1,

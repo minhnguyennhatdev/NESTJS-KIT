@@ -1,3 +1,4 @@
+import { capitalize } from '@commons/utils';
 import config from '@configs/configuration';
 import { Module } from '@nestjs/common';
 import {
@@ -105,7 +106,7 @@ const transformer = function transformer(logData: LogData) {
       typeof logData.meta === 'object'
         ? JSON.stringify(logData.meta)
         : logData.meta,
-    service: 'nami-wallet-history',
+    service: config.SERVICE,
   };
 };
 
@@ -115,9 +116,7 @@ const transformer = function transformer(logData: LogData) {
       transports: [
         new ElasticsearchTransport({
           level: 'info',
-          indexPrefix: config.IS_PRODUCTION
-            ? 'nami-wallet-history'
-            : 'nami-wallet-history-dev',
+          indexPrefix: config.SERVICE,
           clientOpts: {
             node: config.ELASTICSEARCH.NODE,
           },
@@ -127,10 +126,13 @@ const transformer = function transformer(logData: LogData) {
         new winston.transports.Console({
           format: winston.format.combine(
             winston.format.timestamp(),
-            nestWinstonModuleUtilities.format.nestLike('Wallet-History', {
-              colors: true,
-              prettyPrint: true,
-            }),
+            nestWinstonModuleUtilities.format.nestLike(
+              capitalize(config.SERVICE),
+              {
+                colors: true,
+                prettyPrint: true,
+              },
+            ),
           ),
         }),
       ],

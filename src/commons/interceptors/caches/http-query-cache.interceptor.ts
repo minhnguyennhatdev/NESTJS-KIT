@@ -1,9 +1,5 @@
-import {
-  CACHE_KEY_METADATA,
-  CacheInterceptor,
-  ExecutionContext,
-  Injectable,
-} from '@nestjs/common';
+import { CACHE_KEY_METADATA, CacheInterceptor } from '@nestjs/cache-manager';
+import { ExecutionContext, Injectable } from '@nestjs/common';
 
 @Injectable()
 // cache by query

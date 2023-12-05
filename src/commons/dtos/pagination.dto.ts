@@ -15,5 +15,5 @@ export class PaginationDTO extends SortDTO {
   @Min(0)
   @Max(MAXIMUM_LIMIT_SIZE.FIVE_HUNDRED)
   @Type(() => Number)
-  limit = MAXIMUM_LIMIT_SIZE.ONE_HUNDRED;
+  limit? = MAXIMUM_LIMIT_SIZE.ONE_HUNDRED;
 }

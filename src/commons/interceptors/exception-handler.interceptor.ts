@@ -27,9 +27,7 @@ const slackService = config.SLACK.BOT_TOKEN
       {
         type: 'api',
         token: config.SLACK.BOT_TOKEN,
-        defaultChannel: config.IS_PRODUCTION
-          ? config.SLACK.CHANNELS.ALERT
-          : config.SLACK.CHANNELS.ALERT_DEV,
+        defaultChannel: config.SLACK.CHANNELS.ALERT,
         clientOptions: {
           retryConfig: {
             maxRetryTime: 20,
@@ -45,7 +43,7 @@ const slackService = config.SLACK.BOT_TOKEN
       null,
     )
   : {
-      postMessage: (payload) => console.log('slack noti', payload),
+      postMessage: (payload) => console.log('Slack Noti: ', payload),
     };
 
 @Injectable()

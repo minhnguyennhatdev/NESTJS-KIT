@@ -1,35 +1,3 @@
-import Big from 'big.js';
-
-const noteCases = [
-  '^BALANCE: Swap future order (\\d+)$',
-  '^BALANCE: Place future order (\\d+) fee$',
-  '^BALANCE: Close future order (\\d+) fee$',
-  '^BALANCE: Close future order (\\d+) raw profit$',
-  '^BALANCE: Close pending future order (\\d+) return fee$',
-  '^BALANCE: Liquidate active position (\\d+) liquidate fee$',
-  '^BALANCE: Liquidate active position (\\d+) close fee$',
-  '^BALANCE: Liquidate active position (\\d+) raw profit$',
-  '^BALANCE: Close future order (\\d+) swap fee$',
-  '^BALANCE: Future order (\\d+) funding fee$',
-];
-
-export const getOrderIdFromNote = (note) => {
-  const regex = noteCases.map((e) => new RegExp(e)).find((r) => r.test(note));
-  if (!regex) return;
-  return note.replace(regex, '$1');
-};
-
-export const getNumberOfDaysBetweenFromTo = (from: number, to: number) => {
-  if (!from || !to) {
-    return 0;
-  }
-  const difference = to - from;
-  // Convert milliseconds to days
-  const millisecondsInDay = 1000 * 60 * 60 * 24;
-  const numDays = Math.floor(difference / millisecondsInDay);
-  return numDays;
-};
-
 /**
  * @param ms : millisecond
  * @returns : await during ms
@@ -38,6 +6,13 @@ export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export const capitalizeFirstLetter = (string: string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
+
+// capitalize first letter that separate by space or "-" or "_"
+export const capitalize = (string: string) =>
+  string
+    .split(/[\s-_]+/)
+    .map((word) => capitalizeFirstLetter(word))
+    .join(' ');
 
 export const removeSpecialCharacters = (string: string) =>
   string.replace(/[^\w\s]/g, '');
@@ -87,17 +62,3 @@ String.prototype.replaceLast = function (what: string, replacement: string) {
   const lastPc = pcs.pop();
   return pcs.join(what) + replacement + lastPc;
 };
-
-export function roundDownNumber(number: number, digits: number) {
-  return Number(Big(number).round(digits ?? 0, Big.roundDown));
-}
-
-export function parseRedisUri(url: string) {
-  const redisUrl = new URL(url);
-  return {
-    host: redisUrl.hostname,
-    port: Number(redisUrl.port),
-    password: redisUrl.password,
-    db: Number(redisUrl.pathname.split('/')[1]),
-  };
-}

@@ -8,22 +8,19 @@ import config from '@configs/configuration';
 import { ExceptionHandlerInterceptor } from '@commons/interceptors/exception-handler.interceptor';
 
 const appConfig = (app: INestApplication) => {
+  app.useGlobalInterceptors(new ExceptionHandlerInterceptor());
+  app.use(compression());
+  app.use(helmet());
+  app.use(bodyParser.json({ limit: '10mb' }));
+  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+  app.use(cookieParser());
+  app.enableCors(origin);
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
       whitelist: true,
     }),
   );
-  app.useGlobalInterceptors(new ExceptionHandlerInterceptor());
-  app.use(helmet());
-  app.use(bodyParser.json({ limit: '10mb' }));
-  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
-  app.use(cookieParser());
-  app.enableCors({
-    origin,
-    credentials: true,
-  });
-  app.use(compression());
   app.setGlobalPrefix(config.PREFIX);
 };
 

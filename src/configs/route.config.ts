@@ -11,7 +11,7 @@ export const ROUTER = {
     DISK: 'disk',
   },
 
-  PRICE: {
-    default: 'price',
+  DEMO: {
+    default: 'demo',
   },
 };
