@@ -10,7 +10,7 @@ export const capitalizeFirstLetter = (string: string) =>
 // capitalize first letter that separate by space or "-" or "_"
 export const capitalize = (string: string) =>
   string
-    .split(/[\s-_]+/)
+    ?.split(/[\s-_]+/)
     .map((word) => capitalizeFirstLetter(word))
     .join(' ');
 

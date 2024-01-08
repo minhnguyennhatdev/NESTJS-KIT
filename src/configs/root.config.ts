@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { BullModule } from '@nestjs/bull';
 import { RedisModule } from '@databases/redis/redis.module';
 import { MongoDBModule } from '@databases/mongo/mongo.module';
-import { ESModule } from '@databases/elastic/elastic.module';
+import { EsModule } from '@databases/elastic/elastic.module';
 import config from '@configs/configuration';
 import { LoggerModule } from '@commons/modules/logger/logger.module';
 import { CacheModule } from '@commons/modules/cache/cache.module';
@@ -35,7 +35,7 @@ export const RootModules = [
 
   MongoDBModule,
   RedisModule,
-  ESModule,
+  EsModule,
 
   CacheModule,
   LoggerModule,

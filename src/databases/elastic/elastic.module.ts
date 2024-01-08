@@ -11,4 +11,4 @@ import { ElasticsearchModule } from '@nestjs/elasticsearch';
   ],
   exports: [ElasticsearchModule],
 })
-export class ESModule {}
+export class EsModule {}
