@@ -24,16 +24,6 @@ export class PriceService {
 
   /**
    * @Public
-   * @description USDT/VNDC Market Rate (updated each 10 minutes)
-   */
-  public readonly USDT_VNDC_RATE = {
-    bid: 24000 - 120,
-    ask: 24000 + 120,
-    price: 24000,
-  };
-
-  /**
-   * @Public
    * @description Current price of all listed symbols
    *
    * @returns

@@ -85,7 +85,7 @@ export class LockService {
     signature: string | number,
     cb: () => Promise<T>,
     lockedCb?: () => any,
-    overwriteLock = false,
+    overwriteLock = false, // true: ignore lock and process
   ): Promise<T> {
     const { locked } = await this.check(signature);
     if (locked && !overwriteLock) {

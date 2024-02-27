@@ -54,7 +54,6 @@ export const buildQueryString = (params: object) => {
 declare global {
   interface String {
     replaceLast(what: string, replacement: string): string;
-    replaceAll(what: string, replacement: string): string;
   }
 }
 String.prototype.replaceLast = function (what: string, replacement: string) {

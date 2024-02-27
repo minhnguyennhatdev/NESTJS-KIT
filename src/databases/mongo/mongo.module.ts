@@ -4,7 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { ReadPreference } from 'mongodb';
 
-mongoose.set('debug', true);
+mongoose.set('debug', config.IS_PRODUCTION ? false : true);
 
 @Module({
   imports: [
