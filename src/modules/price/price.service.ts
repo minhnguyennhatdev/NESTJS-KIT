@@ -64,8 +64,8 @@ export class PriceService {
    *
    * @default `in this example im using symbol list from exchangeconfigs`
    */
-  private initSymbolTickersStream() {
-    ['BTCUSDT', 'ETHUSDT'].map((e) => this.startSymbolTickerStream(e));
+  private initSymbolTickersStream(symbols = ['BTCUSDT']) {
+    symbols.map((e) => this.startSymbolTickerStream(e));
   }
 
   private startSymbolTickerStream(symbol: string, retry = 0) {
