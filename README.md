@@ -19,6 +19,18 @@ npm run build
 npm run start
 ```
 
+## Ci-Cd with Gitlab
+
+Environment needed for gitlab ci-cd
+
+```bash
+DOCKER_USERNAME
+DOCKER_PASSWORD
+
+SSH_SERVER_IP
+SSH_PRIVATE_KEY
+```
+
 ## Author
 
 Linkedin: [Nhat Minh Nguyen](https://www.linkedin.com/in/minh-nguyen-nhat-a835a6202)

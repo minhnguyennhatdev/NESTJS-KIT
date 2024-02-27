@@ -1,0 +1,14 @@
+node_modules
+
+.git
+.svn
+.idea
+
+*.log
+
+*.tmp
+*.swp
+
+# Ignore build artifacts
+build/
+dist/
