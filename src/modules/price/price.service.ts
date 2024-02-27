@@ -11,7 +11,9 @@ import {
 import { WebSocket } from 'ws';
 import { Exception } from '@commons/constants/exception';
 import { Slack } from '@commons/modules/logger/platforms/slack.module';
-import { SECONDS_TO_MILLISECONDS } from '@commons/constants';
+import { CRON_EXPRESSION, SECONDS_TO_MILLISECONDS } from '@commons/constants';
+import config from '@configs/configuration';
+import { Cron } from '@nestjs/schedule';
 
 @Injectable({
   scope: Scope.DEFAULT,
@@ -54,6 +56,11 @@ export class PriceService {
   private readonly highLowIntervalSubscribers: HighLowIntervalSubscribers = {};
 
   constructor(private readonly slack: Slack) {
+    this.init();
+  }
+
+  @Cron(CRON_EXPRESSION.VIETNAM_MIDNIGHT)
+  protected init() {
     this.initSymbolTickersStream();
   }
 
@@ -70,7 +77,7 @@ export class PriceService {
 
   private startSymbolTickerStream(symbol: string, retry = 0) {
     symbol = symbol.toUpperCase();
-    if (retry > 3) {
+    if (retry > config.NICE) {
       console.error(`Failed to stream ${symbol} ticker`);
       this.slack.sendSlackMessage(`Failed to stream ${symbol} ticker`);
       return;

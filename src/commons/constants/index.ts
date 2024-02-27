@@ -1,3 +1,4 @@
+import { CronExpression } from '@nestjs/schedule';
 import os from 'os';
 
 export const MAXIMUM_LIMIT_SIZE = {
@@ -73,7 +74,15 @@ export const MINUTES_TO_MILLISECONDS = {
   THIRTY: MINUTES_TO_SECONDS.THIRTY * 1000,
 };
 
-// get cpu thread of server
+export const CRON_EXPRESSION = {
+  ...CronExpression,
+  EVERY_6_MINUTES: '*/6 * * * *',
+  EVERY_7_MINUTES: '*/7 * * * *',
+  EVERY_3_SECONDS: '*/3 * * * * *',
+  VIETNAM_MIDNIGHT: '0 0 17 * * *',
+};
+
+// get cpu threads of server
 export const CPU_THREADS = os?.cpus()?.length ?? 4;
 
 export const OK = 'ok';
