@@ -52,7 +52,7 @@ export class Slack {
       type: 'api',
       token: config.SLACK.BOT_TOKEN,
       isGlobal: true,
-      defaultChannel: config.SLACK.CHANNELS.ALERT,
+      defaultChannel: config.SLACK.CHANNELS.DEFAULT,
       clientOptions: {
         retryConfig: {
           maxRetryTime: config.NICE,

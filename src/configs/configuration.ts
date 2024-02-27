@@ -34,7 +34,7 @@ const config = {
   SLACK: {
     BOT_TOKEN: process.env.SLACK_BOT_TOKEN,
     CHANNELS: {
-      ALERT: 'C05TAP544R5',
+      DEFAULT: process.env.SLACK_DEFAULT_CHANNEL,
     },
   },
 } as const;
