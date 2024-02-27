@@ -1,11 +1,11 @@
-import { NamiSlack } from '@commons/modules/logger/platforms/slack.module';
+import { Slack } from '@commons/modules/logger/platforms/slack.module';
 import { ConsoleLogger, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class SystemLogger {
   private readonly logger = new ConsoleLogger();
 
-  constructor(private readonly namiSlack: NamiSlack) {}
+  constructor(private readonly slack: Slack) {}
 
   log(message: any, ...optionalParams: any[]) {
     this.logger.log(message, ...optionalParams);
@@ -17,7 +17,7 @@ export class SystemLogger {
 
   error(message: any, ...optionalParams: any[]) {
     this.logger.error(message, ...optionalParams);
-    this.namiSlack.sendSlackMessage(message, optionalParams);
+    this.slack.sendSlackMessage(message, optionalParams);
   }
 
   warn(message: any, ...optionalParams: any[]) {

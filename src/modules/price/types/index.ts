@@ -1,7 +1,3 @@
-import { ASSETS, CURRENCIES } from '@commons/constants/currencies';
-import { Exception } from '@commons/constants/exception';
-import { BadRequestException } from '@nestjs/common';
-
 export type Ticker = {
   symbol: string;
   bestBid: number; // gia mua
@@ -50,38 +46,61 @@ export type HighLowIntervalSubscribers = Record<
 >;
 
 export interface ISymbolTickerStreamPayload {
-  s: string; // symbol
-  b: string; // base
-  bi: number; // base id
-  q: string; // quote
-  qi: number; // quote id
-  t: number; // time
-  p: number; // last price
-  ld: number; // last day price
-  vc: number; // volume change
+  E: number; // 123456789; // Event time
+  e: string; // '24hrTicker'; // Event type
+  s: string; // 'BNBBTC'; // Symbol
+  p: string; // '0.0015'; // Price change
+  P: string; // '250.00'; // Price change percent
+  w: string; // '0.0018'; // Weighted average price
+  x: string; // '0.0009'; // First trade(F)-1 price (first trade before the 24hr rolling window)
+  c: string; // '0.0025'; // Last price
+  Q: string; // '10'; // Last quantity
+  b: string; // '0.0024'; // Best bid price
+  B: string; // '10'; // Best bid quantity
+  a: string; // '0.0026'; // Best ask price
+  A: string; // '100'; // Best ask quantity
+  o: string; // '0.0010'; // Open price
+  h: string; //  '0.0025'; // High price
+  l: string; //'0.0010'; // Low price
+  v: string; // '10000'; // Total traded base asset volume
+  q: string; // '18'; // Total traded quote asset volume
+  O: number; // 0; // Statistics open time
+  C: number; // 86400000; // Statistics close time
+  F: number; // 0; // First trade ID
+  L: number; // 18150; // Last trade Id
+  n: number; // 18151; // Total number of trades
 }
 
 export class SymbolTicker {
   symbol: string;
   base: string;
   quote: string;
+  priceChange: number;
+  priceChangePercent: number;
   lastPrice: number;
+  lastQuantity: number;
+  bidPrice: number;
+  bidQuantity: number;
+  askPrice: number;
+  askQuantity: number;
+  openPrice: number;
   highPrice: number;
   lowPrice: number;
   constructor(payload: ISymbolTickerStreamPayload) {
     this.symbol = String(payload.s); // Symbol
-    this.base = String(payload.b); // Base asset
-    this.quote = String(payload.q); // Quote Asset
-    this.lastPrice = Number(payload.p); // Last price
-  }
-  public convertQuoteAsset(quote: string) {
-    quote = quote.toUpperCase();
-    if (![ASSETS[CURRENCIES.VNDC], ASSETS[CURRENCIES.VNST]].includes(quote)) {
-      throw new BadRequestException(Exception.INVALID('quote asset'));
-    }
-    this.quote = quote;
-    this.symbol = this.base + this.quote;
-    return this;
+    this.base = String(payload.s.slice(0, -4)); // Base asset
+    this.quote = String(payload.s.slice(-4)); // Quote Asset
+    this.priceChange = Number(payload.p); // Price change
+    this.priceChangePercent = Number(payload.P); // Price change percent
+    this.lastPrice = Number(payload.c); // Last price
+    this.lastQuantity = Number(payload.Q); // Last quantity
+    this.bidPrice = Number(payload.b); // Best bid price
+    this.bidQuantity = Number(payload.Q); // Best bid quantity
+    this.askPrice = Number(payload.a); // Best ask price
+    this.askQuantity = Number(payload.A); // Best ask quantity
+    this.openPrice = Number(payload.o); // Open price
+    this.highPrice = Number(payload.h); // High price
+    this.lowPrice = Number(payload.l); // Low price
   }
 }
 

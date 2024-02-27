@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { PriceService } from '@modules/price/price.service';
 import { ROUTER } from '@configs/route.config';
 
@@ -7,11 +7,8 @@ export class PriceController {
   constructor(private readonly priceService: PriceService) {}
 
   @Get(':pair')
-  async price(
-    @Param('pair') pair: string,
-    @Query() query: { base: string; quote: string },
-  ) {
+  async price(@Param('pair') pair: string) {
     if (pair.toUpperCase() === 'ALL') return this.priceService.bookTickers;
-    return this.priceService.price(pair, query);
+    return this.priceService.bookTickers[pair.toUpperCase()];
   }
 }

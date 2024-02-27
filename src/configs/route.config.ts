@@ -14,4 +14,8 @@ export const ROUTER = {
   DEMO: {
     default: 'demo',
   },
+
+  PRICE: {
+    default: 'price',
+  },
 };

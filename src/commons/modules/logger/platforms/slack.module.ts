@@ -8,7 +8,7 @@ import debounce from 'lodash/debounce';
 import { SECONDS_TO_MILLISECONDS } from '@commons/constants';
 
 @Injectable()
-export class NamiSlack {
+export class Slack {
   public readonly slack: NestSlackService;
 
   constructor(private readonly slackService: NestSlackService) {
@@ -65,7 +65,7 @@ export class NamiSlack {
       },
     }),
   ],
-  providers: [NamiSlack],
-  exports: [NamiSlack],
+  providers: [Slack],
+  exports: [Slack],
 })
 export class SlackModule {}
