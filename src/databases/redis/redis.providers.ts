@@ -4,12 +4,9 @@ import { Redis } from 'ioredis';
 
 export const REDIS_PROVIDER = {
   CACHE: 'REDIS_CACHE_PROVIDER',
-  PRICE: 'REDIS_PRICE_PROVIDER',
 };
 
-export const RedisCacheProvider: Provider = {
+export const RedisCacheProvider: Provider<Redis> = {
   provide: REDIS_PROVIDER.CACHE,
-  useFactory: () => {
-    return new Redis(config.REDIS.CACHE.URI);
-  },
+  useFactory: () => new Redis(config.REDIS.CACHE.URI),
 };

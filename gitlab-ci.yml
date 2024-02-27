@@ -4,12 +4,12 @@ services:
   - docker:dind
 
 variables:
+  DOCKER_IMAGE_NAME: "demo-service" # MODIFY THIS
+  DOCKER_IMAGE_ TAG: "latest" # MODIFY THIS
+  PORT: "3001" # MODIFY THIS
   DOCKER_DRIVER: "overlay2"
-  DOCKER_IMAGE_NAME: "demo-service" # modify this
-  DOCKER_IMAGE_ TAG: "latest" # modify this
   DOCKER_IMAGE_FULL: "${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
-  PORT: "3001" # modify this
-  ENV_PATH: "${PROJECT_PATH}/${DOCKER_IMAGE_NAME}/.env"
+  ENV_PATH: "${PROJECT_PATH}/.env"
 
 stages:
   - build

@@ -27,7 +27,7 @@ const slackService = config.SLACK.BOT_TOKEN
       {
         type: 'api',
         token: config.SLACK.BOT_TOKEN,
-        defaultChannel: config.SLACK.CHANNELS.ALERT,
+        defaultChannel: config.SLACK.CHANNELS.DEFAULT,
         clientOptions: {
           retryConfig: {
             maxRetryTime: 20,

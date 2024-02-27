@@ -1,0 +1,63 @@
+version: "3.3"
+
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning --requirepass 123456
+    volumes:
+      - redis:/var/lib/redis/data
+    networks:
+        - database
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    volumes:
+      - mongo:/data/db
+    networks:
+      - database
+
+  elasticsearch: 
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=123456
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+    volumes:
+      - es:/usr/share/elasticsearch/data
+    networks:
+      - database
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.6.2
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_USERNAME: elastic
+      ELASTICSEARCH_PASSWORD: "123456"
+    volumes:
+      - kibana:/usr/share/kibana/data
+    networks:
+      - database
+
+networks:
+  database:
+    driver: "bridge"
+
+volumes:
+  redis:
+  mongo:
+  mongoconfig:
+  es:
+  kibana:

@@ -19,16 +19,16 @@ npm run build
 npm run start
 ```
 
-## Ci-Cd with Gitlab
+## Ci-cd with Gitlab
 
 Environment needed for gitlab ci-cd
 
 ```bash
 DOCKER_USERNAME
 DOCKER_PASSWORD
-
 SSH_SERVER_IP
 SSH_PRIVATE_KEY
+PROJECT_PATH // absolute path of project for .env file on server
 ```
 
 ## Author
