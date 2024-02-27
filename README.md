@@ -1,6 +1,6 @@
-# NestJS Kit
+# NestJS Kit / Boilerplate
 
-This is a NestJS kit designed to provide a robust starting point for your projects. It includes several features and integrations to help you get started quickly.
+This is a NestJS kit/boilerplate designed to provide a robust starting point for your projects. It includes several features and integrations to help you get started quickly.
 
 ## Features
 
