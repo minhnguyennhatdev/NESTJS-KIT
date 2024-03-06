@@ -9,7 +9,7 @@ services:
     volumes:
       - redis:/var/lib/redis/data
     networks:
-        - database
+        - redis
 
   mongodb:
     image: mongo:latest
@@ -19,9 +19,9 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=mongo
       - MONGO_INITDB_ROOT_PASSWORD=123456
     volumes:
-      - mongo:/data/db
+      - mongodb:/data/db
     networks:
-      - database
+      - mongodb
 
   elasticsearch: 
     image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
@@ -35,9 +35,9 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=true
     volumes:
-      - es:/usr/share/elasticsearch/data
+      - elasticsearch:/usr/share/elasticsearch/data
     networks:
-      - database
+      - elasticsearch
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.6.2
@@ -47,17 +47,19 @@ services:
       ELASTICSEARCH_USERNAME: elastic
       ELASTICSEARCH_PASSWORD: "123456"
     volumes:
-      - kibana:/usr/share/kibana/data
+      - elasticsearch:/usr/share/kibana/data
     networks:
-      - database
+      - elasticsearch
 
 networks:
-  database:
+  redis:
+    driver: "bridge"
+  mongodb:
+    driver: "bridge"
+  elasticsearch:
     driver: "bridge"
 
 volumes:
   redis:
-  mongo:
-  mongoconfig:
-  es:
-  kibana:
+  mongodb:
+  elasticsearch:
