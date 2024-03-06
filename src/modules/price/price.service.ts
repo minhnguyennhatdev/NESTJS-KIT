@@ -21,6 +21,7 @@ import { Cron } from '@nestjs/schedule';
 export class PriceService {
   private readonly BINANCE_MARKET_STREAMS_URL = 'wss://stream.binance.com:9443';
   private readonly PRICE_SPREAD_RATIO = 0.0001;
+  private readonly PRICE_DECIMAL = 8;
 
   /**
    * @Public
@@ -131,8 +132,12 @@ export class PriceService {
     if (lastTickerPrice > 0) {
       matchOrderAction = currentPrice > lastTickerPrice ? 'buy' : 'sell';
     }
-    const closeBuy = Number(Big(currentPrice).times(rate.bid));
-    const closeSell = Number(Big(currentPrice).times(rate.ask));
+    const closeBuy = Number(
+      Big(currentPrice).times(rate.bid).toFixed(this.PRICE_DECIMAL),
+    );
+    const closeSell = Number(
+      Big(currentPrice).times(rate.ask).toFixed(this.PRICE_DECIMAL),
+    );
     const closePrice = matchOrderAction === 'buy' ? closeSell : closeBuy;
     const priceData: Ticker = {
       symbol,
