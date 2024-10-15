@@ -86,9 +86,7 @@ export class ExceptionHandlerInterceptor<T>
             const operations = [
               {
                 index: {
-                  _index: config.IS_PRODUCTION
-                    ? 'nami-wallet-history-error'
-                    : 'nami-wallet-history-error-dev',
+                  _index: `${config.SERVICE}-${config.NODE_ENV}`, // example: demo-development
                 },
               },
               payload,
@@ -116,6 +114,7 @@ export class ExceptionHandlerInterceptor<T>
             });
             return throwError(() => errors);
           } catch (err) {
+            console.error(err);
             return throwError(() => errors);
           }
         }),

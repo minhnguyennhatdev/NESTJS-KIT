@@ -104,9 +104,6 @@ export class PriceService {
   private processPriceStream(_payload: string) {
     const payload: ISymbolTickerStreamPayload = JSON.parse(_payload);
     try {
-      if (payload?.s?.startsWith('DODOX')) {
-        payload.s = payload?.s?.replace('DODOX', 'DODO');
-      }
       const data = new SymbolTicker(payload);
       const usdtConvertRate = {
         bid: 1 - this.PRICE_SPREAD_RATIO,
@@ -126,11 +123,20 @@ export class PriceService {
   ) {
     const symbol = data.symbol;
     const { lastPrice: currentPrice } = data;
-    const _lastPrice = currentPrice * rate.price;
+    // const _lastPrice = currentPrice * rate.price;
+    const _lastPrice = Number(
+      Big(currentPrice).times(rate.price).toFixed(this.PRICE_DECIMAL),
+    );
     const lastTickerPrice = this.bookTickers?.[symbol]?.lastPrice ?? 0;
-    let matchOrderAction = 'buy';
+    const actions = {
+      buy: 'buy',
+      sell: 'sell',
+    };
+    let matchOrderAction = actions.buy;
     if (lastTickerPrice > 0) {
-      matchOrderAction = currentPrice > lastTickerPrice ? 'buy' : 'sell';
+      matchOrderAction = Big(currentPrice).gt(lastTickerPrice)
+        ? actions.buy
+        : actions.sell;
     }
     const closeBuy = Number(
       Big(currentPrice).times(rate.bid).toFixed(this.PRICE_DECIMAL),
@@ -138,7 +144,7 @@ export class PriceService {
     const closeSell = Number(
       Big(currentPrice).times(rate.ask).toFixed(this.PRICE_DECIMAL),
     );
-    const closePrice = matchOrderAction === 'buy' ? closeSell : closeBuy;
+    const closePrice = matchOrderAction === actions.buy ? closeSell : closeBuy;
     const priceData: Ticker = {
       symbol,
       bestBid: closePrice,

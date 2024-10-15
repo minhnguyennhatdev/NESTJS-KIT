@@ -39,7 +39,6 @@
     "class-validator": "^0.14.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
-    "helmet": "^7.0.0",
     "mongoose": "^8.0.0",
     "nest-winston": "^1.9.4",
     "nestjs-slack": "^2.0.0",

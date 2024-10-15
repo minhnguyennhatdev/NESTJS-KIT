@@ -84,7 +84,7 @@ export class LockService {
   async process<T = any>(
     signature: string | number,
     cb: () => Promise<T>,
-    lockedCb?: () => any,
+    lockedCb?: () => any, // callback if locked
     overwriteLock = false, // true: ignore lock and process
   ): Promise<T> {
     const { locked } = await this.check(signature);
