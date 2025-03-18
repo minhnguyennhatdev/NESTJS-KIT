@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import compression from 'compression';
 import origin from '@configs/origin.config';
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { ExceptionHandlerInterceptor } from '@commons/interceptors/exception-handler.interceptor';
 
 const appConfig = async (app: INestApplication) => {

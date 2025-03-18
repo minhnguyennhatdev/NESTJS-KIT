@@ -1,4 +1,4 @@
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { Global, Injectable, Module } from '@nestjs/common';
 import {
   SlackModule as NestSlackModule,

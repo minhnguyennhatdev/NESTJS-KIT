@@ -1,5 +1,5 @@
 import { capitalize } from '@commons/utils';
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { Module } from '@nestjs/common';
 import {
   utilities as nestWinstonModuleUtilities,

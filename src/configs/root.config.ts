@@ -4,7 +4,7 @@ import { BullModule } from '@nestjs/bull';
 import { RedisModule } from '@databases/redis/redis.module';
 import { MongoDBModule } from '@databases/mongo/mongo.module';
 import { EsModule } from '@databases/elasticsearch/elasticsearch.module';
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { LoggerModule } from '@commons/modules/logger/logger.module';
 import { CacheModule } from '@commons/modules/cache/cache.module';
 import { LockModule } from '@commons/modules/lock/lock.module';
@@ -37,6 +37,7 @@ export const RootModules = [
   RedisModule,
   EsModule,
 
+  // common modules
   CacheModule,
   LoggerModule,
   LockModule,

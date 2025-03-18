@@ -1,6 +1,6 @@
 import { MilliSeconds } from '@commons/types/Time';
 import { safeJSONParse } from '@commons/utils';
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { REDIS_PROVIDER } from '@databases/redis/redis.providers';
 import { Inject, Injectable } from '@nestjs/common';
 import { Redis } from 'ioredis';

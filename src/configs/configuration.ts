@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-const config = {
+export const config = Object.freeze({
   SERVICE: process.env.SERVICE || 'demo',
   NODE_ENV: process.env.NODE_ENV || 'development',
   IS_PRODUCTION: process.env.NODE_ENV === 'production',
@@ -37,8 +37,9 @@ const config = {
       DEFAULT: process.env.SLACK_DEFAULT_CHANNEL,
     },
   },
-} as const;
+
+  TEMPORAL_CONNECTION_URL:
+    process.env.TEMPORAL_CONNECTION_URL || 'localhost:7233',
+});
 
 console.warn('--CONFIG--', config);
-
-export default config;

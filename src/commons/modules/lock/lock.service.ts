@@ -2,7 +2,7 @@ import { MINUTES_TO_SECONDS } from '@commons/constants';
 import { Seconds } from '@commons/types/Time';
 import { Inject, Injectable } from '@nestjs/common';
 import { Redis } from 'ioredis';
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { REDIS_PROVIDER } from '@databases/redis/redis.providers';
 
 /**

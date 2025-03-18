@@ -1,4 +1,4 @@
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 

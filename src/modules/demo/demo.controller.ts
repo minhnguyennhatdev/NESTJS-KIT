@@ -1,11 +1,18 @@
 import { HttpCacheInterceptor } from '@commons/interceptors/caches/http-cache.interceptor';
-import { Controller, Get, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Inject, UseInterceptors } from '@nestjs/common';
+import { IDemoService } from '@modules/demo/demo.interface';
+import { ROUTER } from '@configs/route.config';
 
-@Controller()
+@Controller(ROUTER.DEMO.default)
 export class DemoController {
+  constructor(
+    @Inject(IDemoService)
+    private readonly demoService: IDemoService,
+  ) {}
+
   @Get()
   @UseInterceptors(HttpCacheInterceptor)
-  async getDemo() {
-    return 'demo';
+  async helloWorld() {
+    return this.demoService.helloWorld();
   }
 }

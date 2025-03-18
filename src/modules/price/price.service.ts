@@ -12,7 +12,7 @@ import { WebSocket } from 'ws';
 import { Exception } from '@commons/constants/exception';
 import { Slack } from '@commons/modules/logger/platforms/slack.module';
 import { CRON_EXPRESSION, SECONDS_TO_MILLISECONDS } from '@commons/constants';
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { Cron } from '@nestjs/schedule';
 
 @Injectable({

@@ -1,4 +1,4 @@
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { Provider } from '@nestjs/common';
 import { Redis } from 'ioredis';
 

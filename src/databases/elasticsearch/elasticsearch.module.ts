@@ -1,4 +1,4 @@
-import config from '@configs/configuration';
+import { config } from '@configs/configuration';
 import { Global, Module } from '@nestjs/common';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
 
