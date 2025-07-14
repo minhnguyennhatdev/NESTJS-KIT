@@ -7,7 +7,9 @@ import { SystemLogger } from '@commons/modules/logger/system-logger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useLogger(app.get(SystemLogger));
+
   await appConfig(app);
+
   await app.listen(config.PORT).then(async () => {
     console.log('Server is listening on:', await app.getUrl());
   });
